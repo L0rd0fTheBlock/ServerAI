@@ -1,4 +1,4 @@
-package me.jamiemac262.ServerAIReWrite;
+package me.jamiemac262.ServerAIReWrite.function;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 public class ReadWrite {
 	public static List<String> getContents(File aFile){

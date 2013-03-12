@@ -1,6 +1,11 @@
 package me.jamiemac262.ServerAIReWrite;
 //bk
 
+import me.jamiemac262.ServerAIReWrite.function.WarnPlayer;
+import me.jamiemac262.ServerAIReWrite.function.Home;
+import me.jamiemac262.ServerAIReWrite.function.IsMuted;
+import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
+import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,5 +1,7 @@
 package me.jamiemac262.ServerAIReWrite;
 
+import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
+import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

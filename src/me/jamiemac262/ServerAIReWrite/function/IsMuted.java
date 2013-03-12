@@ -1,9 +1,10 @@
-package me.jamiemac262.ServerAIReWrite;
+package me.jamiemac262.ServerAIReWrite.function;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 import org.bukkit.entity.Player;
 
