@@ -299,7 +299,7 @@ public class ServerChatListener implements Listener{
 		}
 
 		if(containsString(Playermessage, "sai") && containsString(Playermessage, "ban")){
-			if(p.hasPermission("sai.ban") || StaffPermission.isModerator(p)){
+			if(p.hasPermission("sai.ban") ){
 			Player target = findPlayerInArray(Playermessage);
 			target.setBanned(true);
 			target.kickPlayer("You have been banned!");
@@ -309,7 +309,7 @@ public class ServerChatListener implements Listener{
 			}
 		}
 			if(containsString(Playermessage, "sai") && containsString(Playermessage, "kick")){
-				if(p.hasPermission("sai.kick") || StaffPermission.isModerator(p)){
+				if(p.hasPermission("sai.kick") ){
 				Player target = findPlayerInArray(Playermessage);
 				target.kickPlayer("You have been kicked!");
 				}
@@ -318,7 +318,7 @@ public class ServerChatListener implements Listener{
 				}
 		}
 		if(containsString(Playermessage, "sai") && containsString(Playermessage, "set") && containsString(Playermessage, "spawn")){
-			if(p.hasPermission("sai.set") || StaffPermission.isAdminstrator(p)){
+			if(p.hasPermission("sai.set")){
 				p.getWorld().setSpawnLocation(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
 				new SendAIMessage(0.5, "A new spawn has been set.", "A new spawn has been set.", "A new spawn has been set.");
 			}
@@ -346,39 +346,6 @@ public class ServerChatListener implements Listener{
 	}if(containsString(Playermessage, "sai") && containsString(Playermessage,"suck") && containsString(Playermessage, "you")){
 		new SendAIMessage(0.5, "Well I <3 you too", "You suck more", "I don't care about your petit human insults");
 		}
-	if(containsString(Playermessage, "sai") && containsString(Playermessage, "moderator")){
-		boolean rank = StaffPermission.isOwner(p);
-		if(rank = true){
-			Player target = findPlayerInArray(Playermessage);
-			StaffPermission.setMod(target);
-			new SendAIMessage(0.5, "Congratulations on your promotion to Moderator" + target, "Congratulations on your promotion to Moderator" + target, "Congratulations on your promotion to Moderator" + target);
-		}
-		else{
-			noPerms();
-		}
-	}
-		if(containsString(Playermessage, "sai") && containsString(Playermessage, "administrator")){
-			boolean rank = StaffPermission.isOwner(p);
-			if(rank = true){
-				Player target = findPlayerInArray(Playermessage);
-				StaffPermission.setAdministrator(target);
-				new SendAIMessage(0.5, "Congratulations on your promotion to Administrator" + target, "Congratulations on your promotion to Administrator" + target, "Congratulations on your promotion to Administrator" + target);
-			}
-			else{
-				noPerms();
-			}
-		}
-			if(containsString(Playermessage, "sai") && containsString(Playermessage, "owner")){
-				boolean rank = StaffPermission.isOwner(p);
-				if(rank = true){
-					Player target = findPlayerInArray(Playermessage);
-					StaffPermission.setOwner(target);
-					new SendAIMessage(0.5, "Congratulations on your promotion to Owner" + target, "Congratulations on your promotion to Owner" + target, "Congratulations on your promotion to Owner" + target);
-				}
-				else{
-					noPerms();
-				}
-			}
 				/*if(containsString(Playermessage, "sai") && containsString(Playermessage, "rank")){
 					boolean nstaff = false;
 					if(StaffPermission.isModerator(p)){
