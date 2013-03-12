@@ -54,8 +54,7 @@ public class ServerChatListener implements Listener{
 		ChatColor WHITE = ChatColor.WHITE;
 		if(muted == true){
 			sendMuteMsg(p,RED + "[SAI] " + WHITE + "Nice try " + p.getName() + ", But you need to speak to a moderator about your language before I can let you speak again");
-			chat.setCancelled(true);
-			return;
+			chat.setCancelled(true);	
 		}
 		else{
 		PluginDescriptionFile pdffile = plugin.getDescription();
