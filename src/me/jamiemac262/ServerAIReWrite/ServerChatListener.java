@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import me.jamiemac262.ServerAIReWrite.function.GameTime;
+import me.jamiemac262.ServerAIReWrite.function.Gamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -238,11 +239,13 @@ public class ServerChatListener implements Listener{
 	if(containsString(Playermessage, "sai")&& containsString(Playermessage, "check") && containsString(Playermessage, "gamemode")){
 		if(p.hasPermission("sai.check")){
 			chat.setCancelled(true);
+                        
 			//new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
-			new SendPrivateAIMessage(p, 0.5, "checking", "ok this will take a second", "ok let me check my memory circuits.");
 			Player target = findPlayerInArray(Playermessage);
-			String gamemode = target.getGameMode().toString();
-			
+                        
+                        new SendPrivateAIMessage(p, 0.5, "checking gamemode for" + target.getDisplayName(), "ok this will take a second", "ok let me check my memory circuits for " + target.getDisplayName());
+			Gamemode mode = new Gamemode(target);
+                        String gamemode = mode.check();
 			new SendPrivateAIMessage(p, 0.5, "it seems that " + target.getDisplayName() + "is in" + gamemode, "it seems that " + target.getDisplayName() + "is in" + gamemode, "it seems that " + target.getDisplayName() + "is in" + gamemode);
 		}else{
 		noPerms();
