@@ -1,6 +1,4 @@
 package me.jamiemac262.ServerAIReWrite;
-//bk
-
 import me.jamiemac262.ServerAIReWrite.function.WarnPlayer;
 import me.jamiemac262.ServerAIReWrite.function.Home;
 import me.jamiemac262.ServerAIReWrite.function.IsMuted;
@@ -14,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import me.jamiemac262.ServerAIReWrite.function.GameTime;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -148,12 +147,9 @@ public class ServerChatListener implements Listener{
 		// set day
 		else if((containsString(Playermessage, "sai") && containsString(Playermessage, "day"))){
 			if(p.hasPermission("sai.time")){
-			
-		        for (World world : Bukkit.getWorlds()) {
-		            world.setTime(0);
-		          }
-				new SendAIMessage(0.5,"Sure thing " + p.getName() + "! The time has been set to day","Okay, The time is set to day, Dont yah just love the sun...","Kool, wait the sun is hot not cold...");
-			}
+                            GameTime time = new GameTime(p);
+                            time.day();
+		        }
 			else if(!p.hasPermission("sai.time")){
 				
 				noPerms();
@@ -208,13 +204,9 @@ public class ServerChatListener implements Listener{
 		//set night
 	 if((containsString(Playermessage, "sai") && containsString(Playermessage, "night"))){
 			if(p.hasPermission("sai.time")){
-				
-		
-		        for (World world : Bukkit.getWorlds()) {
-		            world.setTime(14000);
-		          }
-				new SendAIMessage(0.5,"Sure thing " + p.getName() + "! The time has been set to night","Okay i did it, but why? who likes those nasty mobs?","Boo night, Ahhh a zombie!!");
-			}
+                            GameTime time = new GameTime(p);
+                            time.night();
+		        }
 		
 		else if(!p.hasPermission("sai.time")){
 				noPerms();
