@@ -197,14 +197,8 @@ public class ServerChatListener implements Listener {
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "gamemode") && !containsString(Playermessage, "check"))) {
                 if (p.hasPermission("sai.gamemode")) {
-                    if (p.getGameMode().equals(GameMode.CREATIVE)) {
-                        new SendAIMessage(0.5, "You are now in Survival mode" + p.getDisplayName(), p.getDisplayName() + "You are now in Survival.", "aw too bad " + p.getDisplayName() + " you lost your gm, i cant lose mine, i am everywhere and nowhere at all");
-                        p.setGameMode(GameMode.SURVIVAL);
-
-                    } else {
-                        new SendAIMessage(0.5, "You are now in Creative mode" + p.getDisplayName(), p.getDisplayName() + "You are now in Creative.", "careful when u dig down. " + p.getDisplayName() + " Creatvie doesnt stop at bedrock");
-                        p.setGameMode(GameMode.CREATIVE);
-                    }
+                    Gamemode gm = new Gamemode(p);
+                    gm.change();
                 } else {
                     noPerms();
                 }
