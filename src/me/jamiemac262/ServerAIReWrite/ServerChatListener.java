@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import me.jamiemac262.ServerAIReWrite.function.GameTime;
 import me.jamiemac262.ServerAIReWrite.function.Gamemode;
 import org.bukkit.Bukkit;
@@ -38,7 +39,7 @@ public class ServerChatListener implements Listener {
     String[] Playermessage;
     public FileConfiguration playerStat = null;
     public File playerStatFile = null;
-
+    public AsyncPlayerChatEvent chat;
     public ServerChatListener(ServerAI instance) {
         System.out.println("[SAI] Loading the filter list");
         loadFilterList();
@@ -47,6 +48,7 @@ public class ServerChatListener implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent chat) throws FileNotFoundException, IOException {
+        chat = chat;
         Player p = chat.getPlayer();
         boolean muted = IsMuted.isMuted(p);
         ChatColor RED = ChatColor.RED;
@@ -214,9 +216,8 @@ public class ServerChatListener implements Listener {
                 if (p.hasPermission("sai.check")) {
                     chat.setCancelled(true);
 
-                    //new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
+                    new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
                     Player target = findPlayerInArray(Playermessage);
-
                     new SendPrivateAIMessage(p, 0.5, "checking gamemode for" + target.getDisplayName(), "ok this will take a second", "ok let me check my memory circuits for " + target.getDisplayName());
                     Gamemode mode = new Gamemode(target);
                     String gamemode = mode.check();
@@ -390,12 +391,26 @@ public class ServerChatListener implements Listener {
     }
 
     public static Player findPlayerInArray(String[] playernames) {
-        Player foundPlayer = null;
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (Arrays.asList(playernames).contains(player)) {
-                foundPlayer = player;
-            }
+        ServerAI.logger.log(Level.INFO, "Running PlayerName check");
+        for (int i = 0; i < playernames.length; i++) {
+            String string = playernames[i];
+            ServerAI.logger.log(Level.INFO, string);
         }
+        Player foundPlayer = null;
+        Player[] player = Bukkit.getOnlinePlayers();
+        
+        for (int i = 0; i < playernames.length; i++) {
+            ServerAI.logger.log(Level.INFO, playernames[i]);
+            for (int j = 0; j < player.length; j++) {
+                String play = player[j].getDisplayName();
+                ServerAI.logger.log(Level.INFO, play);
+                if(play.equals(playernames[i])){
+                foundPlayer = player[j];
+                }
+                
+            }          
+        }
+        
         return foundPlayer;
     }
 }
