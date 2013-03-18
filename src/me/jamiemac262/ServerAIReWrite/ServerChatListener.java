@@ -275,6 +275,7 @@ public class ServerChatListener implements Listener {
                     Player target = findPlayerInArray(Playermessage);
                     target.setBanned(true);
                     target.kickPlayer("You have been banned!");
+                    new SendAIMessage(0.5, "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName());
                 } else {
                     noPerms();
                 }
@@ -283,6 +284,7 @@ public class ServerChatListener implements Listener {
                 if (p.hasPermission("sai.kick")) {
                     Player target = findPlayerInArray(Playermessage);
                     target.kickPlayer("You have been kicked!");
+                    new SendAIMessage(0.5, "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName());
                 } else {
                     noPerms();
                 }
