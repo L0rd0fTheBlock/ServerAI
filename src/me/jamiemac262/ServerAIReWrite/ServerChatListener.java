@@ -227,16 +227,17 @@ public class ServerChatListener implements Listener {
                 }
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "op"))) {
-                Player target = Bukkit.getPlayer(Playermessage[2]);
-                Player[] Players = Bukkit.getOnlinePlayers();
                 if (p.isOp()) {
-                    if (Arrays.asList(Players).contains(target)) {
-                        Bukkit.getPlayer(Playermessage[2]).setOp(true);
+                    Player target = findPlayerInArray(Playermessage);
+                    if(target != null){
+                    target.setOp(true);
                         new SendAIMessage(0.5, "" + Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " is now an op", "ok opping " + Bukkit.getPlayer(Playermessage[2]).getDisplayName(), Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " you are now an op. Don't abuse this privalege");
                     }
-                } else if (Arrays.asList(Players).contains(target)) {
+                 else {
                     new SendAIMessage(0.5, "Player is not online, and has never been online", "are you sure that player exists?", "I have infinite knowledge and cannot find that player in my database!");
-                } else {
+                }
+               }
+               else {
                     noPerms();
                 }
             }
@@ -342,7 +343,6 @@ public class ServerChatListener implements Listener {
         // THIS LINE BREAKS SAI DO NOT UNCOMMENT!!!
         //////else{new SendAIMessage(0.5, "Sorry, i do not know how to do this yet", "I do not understand", "I have not been taught this yet");}//end of SAI's responses
     }
-
     public static void loadFilterList() {
         try {
             File file = new File("plugins" + File.separator + "ServerAI" + File.separator + "Filter.txt");
