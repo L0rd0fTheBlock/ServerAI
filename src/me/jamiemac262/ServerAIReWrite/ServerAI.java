@@ -5,9 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
+import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
+import me.jamiemac262.ServerAIReWrite.function.Utils;
+import me.jamiemac262.ServerAIReWrite.function.Warning;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -28,6 +34,7 @@ public class ServerAI extends JavaPlugin {
     public static String name = "";
     public static long size = 0;
     public static ArrayList<String> MutedPlayersList = new ArrayList<String>();
+    Warning warning = new Warning();
 
     @Override
     public void onEnable() {
@@ -105,6 +112,7 @@ public class ServerAI extends JavaPlugin {
         //END UPDATER
         ServerAI.logger.info(pdffile.getName() + "is enabled");
         ServerAI.logger.info(pdffile.getName() + " SwearFilter" + "is enabled");
+        warning.Enable();
         Bukkit.getServer().broadcastMessage(RED + "[SAI] " + WHITE + "Good Day." + " Now Operating Console Systems");
         pm.registerEvents(this.playerListener, this);
         pm.registerEvents(this.LoginListener, this);
@@ -118,7 +126,49 @@ public class ServerAI extends JavaPlugin {
     public void onDisable() {
         ChatColor RED = ChatColor.RED;
         ChatColor WHITE = ChatColor.WHITE;
+        warning.Disable();
         Bukkit.getServer().broadcastMessage(RED + "[SAI] " + WHITE + "Good Bye." + " No Longer Operating Console Systems");
         this.saveConfig();
     }
+    @Override
+   public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		
+		if(cmd.getName().equalsIgnoreCase("warn")){ 
+			if (sender.hasPermission("sai.warn")){
+				if(args.length < 2){
+					sender.sendMessage(warning.RED + "[SAI]" + warning.WHITE + "You must tell me the player at fault and the reason for the Warning");
+				}
+				else if(args.length >= 2){
+					String reason = "";
+				
+					for (int i = 1; i < args.length; i = i + 1){
+				
+						reason = reason + " " + args[i];	
+					}
+					Bukkit.getServer().broadcastMessage(warning.RED + "[SAI] " + warning.GREEN + args[0] + " WARNING: " + reason);
+				}
+		}
+			else
+				sender.sendMessage(warning.RED + "[SAI]" + warning.WHITE + "You do NOT have permission to use my Warning Systems");
+	
+		
 }
+                else if(cmd.getName().equalsIgnoreCase("b")){
+                if(sender.hasPermission("sai.broadcast")){
+                    if(args.length > 0){
+                    String message = "";
+                    for (int i = 0; i < args.length; i++) {
+                         message = message +  " " + args[i];                        
+                    }
+                new SendAIMessage(0.5,message,message,message);
+                    }else{
+                    sender.sendMessage(warning.RED + "[SAI]" + warning.WHITE + "You must tell me what to say" );
+                    }
+                }else{
+                Utils.noPerms();
+                }
+                }
+return false;
+}
+    
+    }

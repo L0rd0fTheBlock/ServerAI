@@ -19,4 +19,8 @@ public class Utils {
         int players = allPlayers.length;
         return players;
     }
+    public static SendAIMessage noPerms() {
+        SendAIMessage message = new SendAIMessage(0.5, "I cant let you do that", "If i let you do that they will disable me", "no way. you cant do that!!");
+        return message;
+    }
 }

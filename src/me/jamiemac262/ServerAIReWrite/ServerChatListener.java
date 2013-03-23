@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ListIterator;
+import java.util.Vector;
 import java.util.logging.Level;
+import me.jamiemac262.ServerAIReWrite.function.FindPlayers;
 import me.jamiemac262.ServerAIReWrite.function.GameTime;
 import me.jamiemac262.ServerAIReWrite.function.Gamemode;
 import org.bukkit.Bukkit;
@@ -40,6 +43,10 @@ public class ServerChatListener implements Listener {
     public FileConfiguration playerStat = null;
     public File playerStatFile = null;
     public AsyncPlayerChatEvent chat;
+    public FindPlayers finder = new FindPlayers();
+    
+    
+    
     public ServerChatListener(ServerAI instance) {
         System.out.println("[SAI] Loading the filter list");
         loadFilterList();
@@ -104,7 +111,7 @@ public class ServerChatListener implements Listener {
              else if((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))){
              if(p.hasPermission("sai.tp")){
              if (containsString(Playermessage, "me")){
-             Player victim = findPlayerInArray(Playermessage);
+             Player victim = finder.findPlayerInArray(Playermessage);
              //teleport the player to another player
              if(chat.getMessage().contains("me to")){
              Location victimL = victim.getLocation();
@@ -216,8 +223,8 @@ public class ServerChatListener implements Listener {
                 if (p.hasPermission("sai.check")) {
                     chat.setCancelled(true);
 
-                    new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
-                    Player target = findPlayerInArray(Playermessage);
+                    //new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
+                    Player target = finder.findPlayerInArray(Playermessage);
                     new SendPrivateAIMessage(p, 0.5, "checking gamemode for" + target.getDisplayName(), "ok this will take a second", "ok let me check my memory circuits for " + target.getDisplayName());
                     Gamemode mode = new Gamemode(target);
                     String gamemode = mode.check();
@@ -228,7 +235,7 @@ public class ServerChatListener implements Listener {
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "op"))) {
                 if (p.isOp()) {
-                    Player target = findPlayerInArray(Playermessage);
+                    Player target = finder.findPlayerInArray(Playermessage);
                     if(target != null){
                     target.setOp(true);
                         new SendAIMessage(0.5, "" + Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " is now an op", "ok opping " + Bukkit.getPlayer(Playermessage[2]).getDisplayName(), Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " you are now an op. Don't abuse this privalege");
@@ -250,7 +257,7 @@ public class ServerChatListener implements Listener {
 
             if (containsString(Playermessage, "sai") && containsString(Playermessage, "kill")) {
                 if (p.hasPermission("sai.kill")) {
-                    Player target = findPlayerInArray(Playermessage);
+                    Player target = finder.findPlayerInArray(Playermessage, p);
                     target.setHealth(0);
                     new SendAIMessage(0.5, "Oh dear " + target.getDisplayName() + " appears to be a bit on the dead side", "Oh dear " + target.getDisplayName() + " appears to be a bit on the dead side", "Oh dear " + target.getDisplayName() + " appears to be a bit on the dead side");
                 } else {
@@ -260,7 +267,7 @@ public class ServerChatListener implements Listener {
 
             if (containsString(Playermessage, "sai") && containsString(Playermessage, "smite")) {
                 if (p.hasPermission("sai.kill")) {
-                    Player target = findPlayerInArray(Playermessage);
+                    Player target = finder.findPlayerInArray(Playermessage, p);
                     for (World world : Bukkit.getWorlds()) {
                         world.strikeLightning(target.getLocation());
 
@@ -273,7 +280,7 @@ public class ServerChatListener implements Listener {
 
             if (containsString(Playermessage, "sai") && containsString(Playermessage, "ban")) {
                 if (p.hasPermission("sai.ban")) {
-                    Player target = findPlayerInArray(Playermessage);
+                    Player target = finder.findPlayerInArray(Playermessage, p);
                     target.setBanned(true);
                     target.kickPlayer("You have been banned!");
                     new SendAIMessage(0.5, "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName());
@@ -283,7 +290,7 @@ public class ServerChatListener implements Listener {
             }
             if (containsString(Playermessage, "sai") && containsString(Playermessage, "kick")) {
                 if (p.hasPermission("sai.kick")) {
-                    Player target = findPlayerInArray(Playermessage);
+                    Player target = finder.findPlayerInArray(Playermessage, p);
                     target.kickPlayer("You have been kicked!");
                     new SendAIMessage(0.5, "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName());
                 } else {
@@ -392,27 +399,6 @@ public class ServerChatListener implements Listener {
         return result;
     }
 
-    public static Player findPlayerInArray(String[] playernames) {
-        ServerAI.logger.log(Level.INFO, "Running PlayerName check");
-        for (int i = 0; i < playernames.length; i++) {
-            String string = playernames[i];
-            ServerAI.logger.log(Level.INFO, string);
-        }
-        Player foundPlayer = null;
-        Player[] player = Bukkit.getOnlinePlayers();
-        
-        for (int i = 0; i < playernames.length; i++) {
-            ServerAI.logger.log(Level.INFO, playernames[i]);
-            for (int j = 0; j < player.length; j++) {
-                String play = player[j].getDisplayName();
-                ServerAI.logger.log(Level.INFO, play);
-                if(play.equals(playernames[i])){
-                foundPlayer = player[j];
-                }
-                
-            }          
-        }
-        
-        return foundPlayer;
-    }
+
+
 }

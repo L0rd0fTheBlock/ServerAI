@@ -5,6 +5,10 @@ description: >
              ServerAI
 
 commands:
+  warn:
+    description: warn the player
+  b:
+    description: broadcast to the server though SAI
 permissions:
 
     sai.admin:
