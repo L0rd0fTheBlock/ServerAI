@@ -44,9 +44,7 @@ public class ServerChatListener implements Listener {
     public File playerStatFile = null;
     public AsyncPlayerChatEvent chat;
     public FindPlayers finder = new FindPlayers();
-    
-    
-    
+
     public ServerChatListener(ServerAI instance) {
         System.out.println("[SAI] Loading the filter list");
         loadFilterList();
@@ -106,44 +104,14 @@ public class ServerChatListener implements Listener {
              jamiemac262
              or by e-mail jamiemac262@gmail.com
              thank you :)
-             */ /*
-             //could not pass event AsyncPlayerChatEvent <== this is the error you are getting?? yeh and a stack trace with it === Can you skype me te stacktrace pls? i will need to re-make the error lol..... on a server gimme 3 mins
-             else if((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))){
-             if(p.hasPermission("sai.tp")){
-             if (containsString(Playermessage, "me")){
-             Player victim = finder.findPlayerInArray(Playermessage);
-             //teleport the player to another player
-             if(chat.getMessage().contains("me to")){
-             Location victimL = victim.getLocation();
-             p.teleport(victimL);
-             new SendAIMessage(0.5, "Ok, sending you to" + victim.getDisplayName(), "Well if you're sure that's what you want to do. sending you to" + victim.getDisplayName(),"Here goes...");
-             }
-             else if(chat.getMessage().contains("to me")){
-             Location victimT = p.getLocation();
-             victim.teleport(victimT); // SHOULD WORK NOW, ONE PROBLEM!!!! " to me" will not be in an array that is split by spaces!!!!!!!!!ah....
-             new SendAIMessage(0.5, "Ok, let me just....... done", "Well if you're sure that's what you want to do. sending " + victim.getDisplayName() + "to you","Here goes...");
-             }
-				
-             }
-             else{
-             Player victim = null;
-             Player target = null;
-             for(Player player : Bukkit.getOnlinePlayers()){//this part
-             if(Arrays.asList(Playermessage).contains(player)){
-             if(victim == null){
-             victim = Bukkit.getPlayer(player.getName());
-             }	
-             else{	
-             target = Bukkit.getPlayer(player.getName());//ohhhhhh....... player is already gotten is it not? in the getOnlinePlayer part
-             }
-             }
-             }
-             Location targetL = target.getLocation();
-             victim.teleport(targetL);
-             new SendAIMessage(0.5, "Ok, sending " + victim.getDisplayName() + "to" + target.getDisplayName(), "Well if you're sure that's what you want to do. sending " + victim.getDisplayName() + "to " + target.getDisplayName(),"Here goes...");
-             }
-             }
-             }*/ // set day
+             */ //could not pass event AsyncPlayerChatEvent <== this is the error you are getting?? yeh and a stack trace with it === Can you skype me te stacktrace pls? i will need to re-make the error lol..... on a server gimme 3 mins
+            else if ((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))) {
+                if (p.hasPermission("sai.tp")) {
+                    if(containsString(Playermessage, "me")){
+                    //I am working on this function:  jamiemac262
+                    }
+                }
+            } // set day
             else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "day"))) {
                 if (p.hasPermission("sai.time")) {
                     GameTime time = new GameTime(p);
@@ -236,15 +204,13 @@ public class ServerChatListener implements Listener {
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "op"))) {
                 if (p.isOp()) {
                     Player target = finder.findPlayerInArray(Playermessage);
-                    if(target != null){
-                    target.setOp(true);
+                    if (target != null) {
+                        target.setOp(true);
                         new SendAIMessage(0.5, "" + Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " is now an op", "ok opping " + Bukkit.getPlayer(Playermessage[2]).getDisplayName(), Bukkit.getPlayer(Playermessage[2]).getDisplayName() + " you are now an op. Don't abuse this privalege");
+                    } else {
+                        new SendAIMessage(0.5, "Player is not online, and has never been online", "are you sure that player exists?", "I have infinite knowledge and cannot find that player in my database!");
                     }
-                 else {
-                    new SendAIMessage(0.5, "Player is not online, and has never been online", "are you sure that player exists?", "I have infinite knowledge and cannot find that player in my database!");
-                }
-               }
-               else {
+                } else {
                     noPerms();
                 }
             }
@@ -283,7 +249,7 @@ public class ServerChatListener implements Listener {
                     Player target = finder.findPlayerInArray(Playermessage, p);
                     target.setBanned(true);
                     target.kickPlayer("You have been banned!");
-                    new SendAIMessage(0.5, "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(),"I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName());
+                    new SendAIMessage(0.5, "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(), "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(), "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName());
                 } else {
                     noPerms();
                 }
@@ -292,7 +258,7 @@ public class ServerChatListener implements Listener {
                 if (p.hasPermission("sai.kick")) {
                     Player target = finder.findPlayerInArray(Playermessage, p);
                     target.kickPlayer("You have been kicked!");
-                    new SendAIMessage(0.5, "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(),"I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName());
+                    new SendAIMessage(0.5, "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(), "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName(), "I have kicked " + target.getPlayerListName() + " at the request of " + p.getDisplayName());
                 } else {
                     noPerms();
                 }
@@ -350,6 +316,7 @@ public class ServerChatListener implements Listener {
         // THIS LINE BREAKS SAI DO NOT UNCOMMENT!!!
         //////else{new SendAIMessage(0.5, "Sorry, i do not know how to do this yet", "I do not understand", "I have not been taught this yet");}//end of SAI's responses
     }
+
     public static void loadFilterList() {
         try {
             File file = new File("plugins" + File.separator + "ServerAI" + File.separator + "Filter.txt");
@@ -398,7 +365,4 @@ public class ServerChatListener implements Listener {
         }
         return result;
     }
-
-
-
 }
