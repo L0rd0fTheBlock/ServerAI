@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import me.jamiemac262.ServerAIReWrite.function.FindPlayers;
 import me.jamiemac262.ServerAIReWrite.function.GameTime;
 import me.jamiemac262.ServerAIReWrite.function.Gamemode;
+import me.jamiemac262.ServerAIReWrite.function.Teleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -107,8 +108,19 @@ public class ServerChatListener implements Listener {
              */ //could not pass event AsyncPlayerChatEvent <== this is the error you are getting?? yeh and a stack trace with it === Can you skype me te stacktrace pls? i will need to re-make the error lol..... on a server gimme 3 mins
             else if ((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))) {
                 if (p.hasPermission("sai.tp")) {
-                    if(containsString(Playermessage, "me")){
-                    //I am working on this function:  jamiemac262
+                    Teleport teleport = new Teleport();
+                    if(containsString(Playermessage, "me to")){
+                        System.out.println("Teleporting " + p.getPlayerListName() + " to " + finder.findPlayerInArray(Playermessage));
+                        teleport.meTo(finder.findPlayerInArray(Playermessage), p.getPlayer());
+                    }
+                    else if (containsString(Playermessage, "to me")){
+                        System.out.println("Teleporting " + finder.findPlayerInArray(Playermessage) + " to " + p.getPlayerListName());
+                        teleport.toMe(finder.findPlayerInArray(Playermessage), p.getPlayer());
+                    }
+                    else{
+                        Player[] players = finder.findPlayersInArray(Playermessage, p.getPlayer());
+                        System.out.println("Teleporting " + players[0] + "to" + players[1]);
+                    teleport.tp(players[0], players[1]);
                     }
                 }
             } // set day
