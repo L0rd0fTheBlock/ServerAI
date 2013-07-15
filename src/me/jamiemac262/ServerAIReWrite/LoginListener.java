@@ -35,7 +35,7 @@ public class LoginListener implements Listener {
         Player player = event.getPlayer();
         String playerName = player.getDisplayName();
 
-        System.out.print("this is proving that the damned event works");
+        //System.out.print("this is proving that the damned event works");
         //updater DO NOT TOUCH
         if (ServerAI.ask_updates == true) {
             if (player.hasPermission("sai.admin") && ServerAI.update) {
@@ -54,6 +54,9 @@ public class LoginListener implements Listener {
             } else if (name.equals("123xray123")) {
                 new SendAIMessage(0.5, "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P", "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P", "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P");
             } else if (name.equals("random8861")) {
+                
+                } else if (name.equals("dmkiller11")) {
+                    new SendAIMessage(0.5, "I.. I. I cant believe it, its dmkiller11!", "Yo dmkiller? wassup man! thanks for the improvements", "Hey its Dmkiller11, thanks for that memory!");
             } else {
                 new SendAIMessage(0.5, "welcome to the server, " + event.getPlayer().getDisplayName() + " I will be your host", "welcome to the server, " + event.getPlayer().getDisplayName() + " I will be your host", "welcome to the server, " + event.getPlayer().getDisplayName() + " I will be your host");
             }
