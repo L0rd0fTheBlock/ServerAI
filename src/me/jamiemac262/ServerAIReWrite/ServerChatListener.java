@@ -62,12 +62,15 @@ public class ServerChatListener implements Listener {
         boolean muted = IsMuted.isMuted(p);
         ChatColor RED = ChatColor.RED;
         ChatColor WHITE = ChatColor.WHITE;
+        //PART 3 OF THE TPA
+        //Bug exists here, First chat  message does not get recognized but second one does. Unable for publish without fixing this...
         if((p == targetTPA && TeleportRequestable.TeleCheck == true) && (containsString(Playermessage, "yes") || containsString(Playermessage, "sure") || containsString(Playermessage, "yep") || containsString(Playermessage, "yeah")))
-        {      
-            TeleportRequestable.toMe( TeleportRequestable.publicSender ,p);
+        {      //^^ is the player the target who excepts? and do they say yes...
+        //TODO add deny function
+            TeleportRequestable.toMe( TeleportRequestable.publicSender ,p);//Commence teleport
             new SendAIMessage(0.5, "Haha it worked! Not bad!", "Wait what, how did I do that?", "To infinity and beyond! okay, that was a little cheesy...");
-            TeleportRequestable.Checks = 59;
-            chat.setCancelled(true);        
+            TeleportRequestable.Checks = 59;//Set the checks to 59 to emulate teleport request expiring
+            chat.setCancelled(true);        //cancel chat so no spam from everyone teleporting
         }else{
         if (muted == true) {
             sendMuteMsg(p, RED + "[SAI] " + WHITE + "Nice try " + p.getName() + ", But you need to speak to a moderator about your language before I can let you speak again");
@@ -100,21 +103,21 @@ public class ServerChatListener implements Listener {
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "cake"))) {
                 new SendAIMessage(0.5, "The cake is a lie", "The cake is a lie", "The cake is a lie");
             }
-            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "tpa")))
+            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "tpa")))//PART 2 IN SAIS TPA
             {
-            senderTPA = p;
+            senderTPA = p;//Set temp vars to be used in the threaded tpa
             targetTPA = finder.findPlayerInArray(Playermessage);
-            if(targetTPA != null)
+            if(targetTPA != null)//make sure its a real player
                 {
                     
-                chat.setCancelled(true);
-                new Thread(new TeleportRequestable()).start();
+                chat.setCancelled(true);//cancel chat so everyone doesnt see it.
+                new Thread(new TeleportRequestable()).start();//Start a new thread of teleportRequestable @ run function
             }else{
                   new SendPrivateAIMessage(p, 0.5, "Im sorry, who would you like to teleport to?","You didnt say who you wanted to go to!","No players recognized!");
-                 }
+                 }//^^Standard stuff...
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "sun") || containsString(Playermessage, "day"))) {
-                 if (p.hasPermission("sai.time")) {
+                 if (p.hasPermission("sai.time")) {//Combined day and sun w/ perm support
                     GameTime time = new GameTime(p);
                     time.day();
                 new SendAIMessage(0.5, "Sunshine :)", "Don't ya just love the sun", "Sun baby");
