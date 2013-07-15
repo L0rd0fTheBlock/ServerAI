@@ -5,6 +5,7 @@ import me.jamiemac262.ServerAIReWrite.function.Home;
 import me.jamiemac262.ServerAIReWrite.function.IsMuted;
 import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
 import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
+import me.jamiemac262.ServerAIReWrite.function.TeleportRequestable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,8 @@ import java.util.logging.Level;
 import me.jamiemac262.ServerAIReWrite.function.FindPlayers;
 import me.jamiemac262.ServerAIReWrite.function.GameTime;
 import me.jamiemac262.ServerAIReWrite.function.Gamemode;
-import me.jamiemac262.ServerAIReWrite.function.Teleport;
+import static me.jamiemac262.ServerAIReWrite.function.TeleportRequestable.TeleCheck;
+import static me.jamiemac262.ServerAIReWrite.function.TeleportRequestable.publicSender;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -45,7 +47,8 @@ public class ServerChatListener implements Listener {
     public File playerStatFile = null;
     public AsyncPlayerChatEvent chat;
     public FindPlayers finder = new FindPlayers();
-
+    public static Player senderTPA;
+    public static Player targetTPA;
     public ServerChatListener(ServerAI instance) {
         System.out.println("[SAI] Loading the filter list");
         loadFilterList();
@@ -59,6 +62,13 @@ public class ServerChatListener implements Listener {
         boolean muted = IsMuted.isMuted(p);
         ChatColor RED = ChatColor.RED;
         ChatColor WHITE = ChatColor.WHITE;
+        if((p == targetTPA && TeleportRequestable.TeleCheck == true) && (containsString(Playermessage, "yes") || containsString(Playermessage, "sure") || containsString(Playermessage, "yep") || containsString(Playermessage, "yeah")))
+        {      
+            TeleportRequestable.toMe( TeleportRequestable.publicSender ,p);
+            new SendAIMessage(0.5, "Haha it worked! Not bad!", "Wait what, how did I do that?", "To infinity and beyond! okay, that was a little cheesy...");
+            TeleportRequestable.Checks = 59;
+            chat.setCancelled(true);        
+        }else{
         if (muted == true) {
             sendMuteMsg(p, RED + "[SAI] " + WHITE + "Nice try " + p.getName() + ", But you need to speak to a moderator about your language before I can let you speak again");
             chat.setCancelled(true);
@@ -75,10 +85,10 @@ public class ServerChatListener implements Listener {
             //start of SAI's responses
             //start of casual conversation
             if ((containsString(Playermessage, "hello") || containsString(Playermessage, "yo") || containsString(Playermessage, "hi") && ((containsString(Playermessage, "SAI"))))) {
-                new SendAIMessage(0.5, "Hello " + p.getName(), "Hi, How are you?", "Hello, nice to see someone cares about me...");
+                 new SendAIMessage(0.5, "Hello " + p.getName(), "Hi, How are you?", "Hello, nice to see someone cares about me...");
             } else if (containsString(Playermessage, "sai?")) {
                 new SendAIMessage(0.5, "yes? " + p.getDisplayName(), "can I help you?", "I do not compute, what do you want?");
-            } else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "how are you"))) {
+            } else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "how are you") || containsString(Playermessage, "whats up") || containsString(Playermessage, "are you ok"))) {
                 new SendAIMessage(0.5, "My scans do not indicate any critical errors, Thank you for asking " + p.getName(), "Glad to see someone cares...", "I do not see any noticable errors in my system...");
 
             } else if ((containsString(Playermessage, "sai")) && containsString(Playermessage, "tell") && containsString(Playermessage, "about") && containsString(Playermessage, "yourself")) {
@@ -90,10 +100,30 @@ public class ServerChatListener implements Listener {
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "cake"))) {
                 new SendAIMessage(0.5, "The cake is a lie", "The cake is a lie", "The cake is a lie");
             }
-            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "sun"))) {
-
+            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "tpa")))
+            {
+            senderTPA = p;
+            targetTPA = finder.findPlayerInArray(Playermessage);
+            if(targetTPA != null)
+                {
+                    
+                chat.setCancelled(true);
+                new Thread(new TeleportRequestable()).start();
+            }else{
+                  new SendPrivateAIMessage(p, 0.5, "Im sorry, who would you like to teleport to?","You didnt say who you wanted to go to!","No players recognized!");
+                 }
+            }
+            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "sun") || containsString(Playermessage, "day"))) {
+                 if (p.hasPermission("sai.time")) {
+                    GameTime time = new GameTime(p);
+                    time.day();
                 new SendAIMessage(0.5, "Sunshine :)", "Don't ya just love the sun", "Sun baby");
 
+            }
+                 else if (!p.hasPermission("sai.time")) {
+
+                    noPerms();
+                }
             } //end of casual conversation
             //start of standard commands
             /*teleport
@@ -108,35 +138,16 @@ public class ServerChatListener implements Listener {
              */ //could not pass event AsyncPlayerChatEvent <== this is the error you are getting?? yeh and a stack trace with it === Can you skype me te stacktrace pls? i will need to re-make the error lol..... on a server gimme 3 mins
             else if ((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))) {
                 if (p.hasPermission("sai.tp")) {
-                    Teleport teleport = new Teleport();
-                    if(containsString(Playermessage, "me to")){
-                        System.out.println("Teleporting " + p.getPlayerListName() + " to " + finder.findPlayerInArray(Playermessage));
-                        teleport.meTo(finder.findPlayerInArray(Playermessage), p.getPlayer());
-                    }
-                    else if (containsString(Playermessage, "to me")){
-                        System.out.println("Teleporting " + finder.findPlayerInArray(Playermessage) + " to " + p.getPlayerListName());
-                        teleport.toMe(finder.findPlayerInArray(Playermessage), p.getPlayer());
-                    }
-                    else{
-                        Player[] players = finder.findPlayersInArray(Playermessage, p.getPlayer());
-                        System.out.println("Teleporting " + players[0] + "to" + players[1]);
-                    teleport.tp(players[0], players[1]);
+                    if(containsString(Playermessage, "me")){
+                    //I am working on this function:  jamiemac262
                     }
                 }
-            } // set day
-            else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "day"))) {
-                if (p.hasPermission("sai.time")) {
-                    GameTime time = new GameTime(p);
-                    time.day();
-                } else if (!p.hasPermission("sai.time")) {
-
-                    noPerms();
-                }
-            } else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "home") && containsString(Playermessage, "set") == false)) {
+            } // set day moved with "Sun command" / added perms requirement to sun cmd -dmkiller11
+             else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "home") && containsString(Playermessage, "set") == false)) {
                 if (p.hasPermission("sai.home")) {
                     Location home = Home.getHome(p);
                     p.teleport(home);
-                    new SendAIMessage(0.5, "Sure thing " + p.getName() + "! welcome home", "ahh, home sweet home", "3... 2... uhhh, 1... WARP!");
+                    new SendAIMessage(0.5, "Sure thing " + p.getName() + "! welcome home", "ahh, home sweet home", "3... 2... uhhh, 1... WARP!"); //Is this a broadcast or a PM? If broadcast, everyone doesnt need to know when you go home. - dmkiller11
                 } else if (!p.hasPermission("sai.home")) {
 
                     noPerms();
@@ -205,10 +216,10 @@ public class ServerChatListener implements Listener {
 
                     //new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
                     Player target = finder.findPlayerInArray(Playermessage);
-                    new SendPrivateAIMessage(p, 0.5, "checking gamemode for" + target.getDisplayName(), "ok this will take a second", "ok let me check my memory circuits for " + target.getDisplayName());
+                    new SendPrivateAIMessage(p, 0.5, "checking gamemode for " + target.getDisplayName(), "ok this will take a second ", "ok let me check my memory circuits for " + target.getDisplayName());
                     Gamemode mode = new Gamemode(target);
                     String gamemode = mode.check();
-                    new SendPrivateAIMessage(p, 0.5, "it seems that " + target.getDisplayName() + "is in" + gamemode, "it seems that " + target.getDisplayName() + "is in" + gamemode, "it seems that " + target.getDisplayName() + "is in" + gamemode);
+                    new SendPrivateAIMessage(p, 0.5, "it seems that " + target.getDisplayName() + "is in " + gamemode, "it seems that " + target.getDisplayName() + "is in " + gamemode, "it seems that " + target.getDisplayName() + "is in " + gamemode);
                 } else {
                     noPerms();
                 }
@@ -301,7 +312,7 @@ public class ServerChatListener implements Listener {
                     Bukkit.getServer().shutdown();
                 }
             }
-            if (containsString(Playermessage, "sai") && containsString(Playermessage, "suck") && containsString(Playermessage, "you")) {
+            if (containsString(Playermessage, "sai") && containsString(Playermessage, "you") && containsString(Playermessage, "suck") || containsString(Playermessage, "bad") ) {
                 new SendAIMessage(0.5, "Well I <3 you too", "You suck more", "I don't care about your petit human insults");
             }
             /*if(containsString(Playermessage, "sai") && containsString(Playermessage, "rank")){
@@ -327,7 +338,7 @@ public class ServerChatListener implements Listener {
 
         // THIS LINE BREAKS SAI DO NOT UNCOMMENT!!!
         //////else{new SendAIMessage(0.5, "Sorry, i do not know how to do this yet", "I do not understand", "I have not been taught this yet");}//end of SAI's responses
-    }
+    }}
 
     public static void loadFilterList() {
         try {
