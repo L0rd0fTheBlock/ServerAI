@@ -1,4 +1,4 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

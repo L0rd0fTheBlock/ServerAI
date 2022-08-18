@@ -1,4 +1,4 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import java.io.File;
 import java.io.IOException;

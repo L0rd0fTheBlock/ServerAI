@@ -1,14 +1,9 @@
-package me.jamiemac262.ServerAIReWrite;
+package me.vulps22.ServerAIReWrite;
 
-import me.jamiemac262.ServerAIReWrite.function.IsMuted;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
-import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
-import me.jamiemac262.ServerAIReWrite.function.Utils;
-import me.jamiemac262.ServerAIReWrite.function.Warning;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +13,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.vulps22.ServerAIReWrite.function.IsMuted;
+import me.vulps22.ServerAIReWrite.function.SendAIMessage;
+import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
+import me.vulps22.ServerAIReWrite.function.Utils;
+import me.vulps22.ServerAIReWrite.function.Warning;
 
 public class ServerAI extends JavaPlugin {
 

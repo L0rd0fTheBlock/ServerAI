@@ -1,4 +1,4 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import me.jamiemac262.ServerAIReWrite.ServerAI;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
 
 public class ReadWrite {
 

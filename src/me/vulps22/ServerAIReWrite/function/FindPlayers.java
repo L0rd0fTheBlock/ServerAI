@@ -1,10 +1,12 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
-import me.jamiemac262.ServerAIReWrite.ServerAI;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
 
 /**
  *

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;

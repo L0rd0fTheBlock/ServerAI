@@ -1,7 +1,6 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import java.util.logging.Logger;
-import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
 
 public class Warning {
 	public static Warning plugin;

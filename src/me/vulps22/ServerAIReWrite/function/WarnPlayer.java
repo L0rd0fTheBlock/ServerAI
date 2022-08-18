@@ -1,17 +1,18 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
-import me.jamiemac262.ServerAIReWrite.function.ReadWrite;
-import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
+import me.vulps22.ServerAIReWrite.function.ReadWrite;
+import me.vulps22.ServerAIReWrite.function.SendAIMessage;
 
 public class WarnPlayer {
 

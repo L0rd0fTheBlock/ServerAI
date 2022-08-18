@@ -1,12 +1,13 @@
-package me.jamiemac262.ServerAIReWrite.function;
+package me.vulps22.ServerAIReWrite.function;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 import org.bukkit.entity.Player;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
 
 public class IsMuted {
 

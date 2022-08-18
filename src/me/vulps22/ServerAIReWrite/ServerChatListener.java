@@ -1,11 +1,8 @@
-package me.jamiemac262.ServerAIReWrite;
+package me.vulps22.ServerAIReWrite;
 
-import me.jamiemac262.ServerAIReWrite.function.WarnPlayer;
-import me.jamiemac262.ServerAIReWrite.function.Home;
-import me.jamiemac262.ServerAIReWrite.function.IsMuted;
-import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
-import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
-import me.jamiemac262.ServerAIReWrite.function.TeleportRequestable;
+import static me.vulps22.ServerAIReWrite.function.TeleportRequestable.TeleCheck;
+import static me.vulps22.ServerAIReWrite.function.TeleportRequestable.publicSender;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,11 +14,7 @@ import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Vector;
 import java.util.logging.Level;
-import me.jamiemac262.ServerAIReWrite.function.FindPlayers;
-import me.jamiemac262.ServerAIReWrite.function.GameTime;
-import me.jamiemac262.ServerAIReWrite.function.Gamemode;
-import static me.jamiemac262.ServerAIReWrite.function.TeleportRequestable.TeleCheck;
-import static me.jamiemac262.ServerAIReWrite.function.TeleportRequestable.publicSender;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -33,6 +26,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
+
+import me.vulps22.ServerAIReWrite.function.FindPlayers;
+import me.vulps22.ServerAIReWrite.function.GameTime;
+import me.vulps22.ServerAIReWrite.function.Gamemode;
+import me.vulps22.ServerAIReWrite.function.Home;
+import me.vulps22.ServerAIReWrite.function.IsMuted;
+import me.vulps22.ServerAIReWrite.function.SendAIMessage;
+import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
+import me.vulps22.ServerAIReWrite.function.TeleportRequestable;
+import me.vulps22.ServerAIReWrite.function.WarnPlayer;
 
 public class ServerChatListener implements Listener {
 
@@ -97,8 +100,8 @@ public class ServerChatListener implements Listener {
             } else if ((containsString(Playermessage, "sai")) && containsString(Playermessage, "tell") && containsString(Playermessage, "about") && containsString(Playermessage, "yourself")) {
                 new SendPrivateAIMessage(p, 0.5, "My designation is Server Artificial Intelegence, however most players just call me SAI", "My designation is Server Artificial Intelegence, however most players just call me SAI", "My designation is Server Artificial Intelegence, however most players just call me SAI");
                 new SendPrivateAIMessage(p, 0.5, "i am operating on Version " + pdffile.getVersion(), "i am operating on Version " + pdffile.getVersion(), "i am operating on Version " + pdffile.getVersion());
-                new SendPrivateAIMessage(p, 0.5, "My Main creator is jamiemac262 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is jamiemac262 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is jamiemac262 however my coding consists of contributions from external sources - mainly bukkit.org");
-                new SendPrivateAIMessage(p, 0.5, "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & jamiemac262.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & jamiemac262.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & jamiemac262.");
+                new SendPrivateAIMessage(p, 0.5, "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org");
+                new SendPrivateAIMessage(p, 0.5, "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.");
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "cake"))) {
                 new SendAIMessage(0.5, "The cake is a lie", "The cake is a lie", "The cake is a lie");
@@ -135,14 +138,14 @@ public class ServerChatListener implements Listener {
 		
              if anybody reads this anc can see the problem with this section of code, please contace me on skype
 		
-             jamiemac262
-             or by e-mail jamiemac262@gmail.com
+             vulps22
+             or by e-mail vulps22@gmail.com
              thank you :)
              */ //could not pass event AsyncPlayerChatEvent <== this is the error you are getting?? yeh and a stack trace with it === Can you skype me te stacktrace pls? i will need to re-make the error lol..... on a server gimme 3 mins
             else if ((containsString(Playermessage, "sai") && (containsString(Playermessage, "teleport")) || containsString(Playermessage, "tp"))) {
                 if (p.hasPermission("sai.tp")) {
                     if(containsString(Playermessage, "me")){
-                    //I am working on this function:  jamiemac262
+                    //I am working on this function:  vulps22
                     }
                 }
             } // set day moved with "Sun command" / added perms requirement to sun cmd -dmkiller11

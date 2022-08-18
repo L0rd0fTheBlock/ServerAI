@@ -1,13 +1,9 @@
-package me.jamiemac262.ServerAIReWrite;
+package me.vulps22.ServerAIReWrite;
 
-import me.jamiemac262.ServerAIReWrite.function.SendAIMessage;
-import me.jamiemac262.ServerAIReWrite.function.SendPrivateAIMessage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import me.jamiemac262.ServerAIReWrite.ServerAI;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +14,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.vulps22.ServerAIReWrite.ServerAI;
+import me.vulps22.ServerAIReWrite.function.SendAIMessage;
+import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
 
 public class LoginListener implements Listener {
 
@@ -49,10 +49,8 @@ public class LoginListener implements Listener {
 //Does SAI recognise the Tekkcraft team? personalized messages for each member of the team
         if (ServerAI.know_maker = true) {
             String name = event.getPlayer().getDisplayName();
-            if (name.equals("jamiemac262")) {
-                new SendAIMessage(0.5, "My creator jamiemac262 has just logged onto the server! :D", "My creator jamiemac262 has just logged onto the server! :D", "My creator jamiemac262 has just logged onto the server! :D");
-            } else if (name.equals("123xray123")) {
-                new SendAIMessage(0.5, "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P", "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P", "My Home Server's Co-Owner has just logged in. Welcome 123xray123.... EGGS! :P");
+            if (name.equals("vulps22")) {
+                new SendAIMessage(0.5, "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D");
             } else if (name.equals("random8861")) {
                 
                 } else if (name.equals("dmkiller11")) {
