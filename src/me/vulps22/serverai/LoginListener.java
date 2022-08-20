@@ -49,7 +49,7 @@ public class LoginListener implements Listener {
         if (ServerAI.know_maker = true) {
             String name = event.getPlayer().getDisplayName();
             System.out.println(name);
-            if (name.equals("vulps22")) {
+            if (name.equals("Vulps22")) {
                 
                 new SendAIMessage(0.5, "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D");
             } else if (name.equals("random8861")) {

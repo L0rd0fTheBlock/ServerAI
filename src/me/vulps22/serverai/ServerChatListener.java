@@ -28,7 +28,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 import me.vulps22.serverai.function.FindPlayers;
 import me.vulps22.serverai.function.GameTime;
-import me.vulps22.serverai.function.Gamemode;
 import me.vulps22.serverai.function.Home;
 import me.vulps22.serverai.function.IsMuted;
 import me.vulps22.serverai.function.SendAIMessage;
@@ -98,10 +97,10 @@ public class ServerChatListener implements Listener {
                 new SendAIMessage(0.5, "My scans do not indicate any critical errors, Thank you for asking " + p.getName(), "Glad to see someone cares...", "I do not see any noticable errors in my system...");
 
             } else if ((containsString(Playermessage, "sai")) && containsString(Playermessage, "tell") && containsString(Playermessage, "about") && containsString(Playermessage, "yourself")) {
-                new SendPrivateAIMessage(p, 0.5, "My designation is Server Artificial Intelegence, however most players just call me SAI", "My designation is Server Artificial Intelegence, however most players just call me SAI", "My designation is Server Artificial Intelegence, however most players just call me SAI");
+                new SendPrivateAIMessage(p, 0.5, "My designation is Server Artificial Intelligence, however most players just call me SAI", "My designation is Server Artificial Intelligence, however most players just call me SAI", "My designation is Server Artificial Intelligence, however most players just call me SAI");
                 new SendPrivateAIMessage(p, 0.5, "i am operating on Version " + pdffile.getVersion(), "i am operating on Version " + pdffile.getVersion(), "i am operating on Version " + pdffile.getVersion());
-                new SendPrivateAIMessage(p, 0.5, "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org");
-                new SendPrivateAIMessage(p, 0.5, "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & vulps22.");
+                new SendPrivateAIMessage(p, 0.5, "My Main creator is vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is Vulps22 however my coding consists of contributions from external sources - mainly bukkit.org", "My Main creator is Vulps22 however my coding consists of contributions from external sources - mainly bukkit.org");
+                new SendPrivateAIMessage(p, 0.5, "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & Vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & Vulps22.", "my memory functions and other features were developed by dmkiller11 and later updated and maintained by random8861 & Vulps22.");
             }
             if ((containsString(Playermessage, "sai") && containsString(Playermessage, "cake"))) {
                 new SendAIMessage(0.5, "The cake is a lie", "The cake is a lie", "The cake is a lie");
@@ -155,14 +154,11 @@ public class ServerChatListener implements Listener {
                     p.teleport(home);
                     new SendAIMessage(0.5, "Sure thing " + p.getName() + "! welcome home", "ahh, home sweet home", "3... 2... uhhh, 1... WARP!"); //Is this a broadcast or a PM? If broadcast, everyone doesnt need to know when you go home. - dmkiller11
                 } else if (!p.hasPermission("sai.home")) {
-
                     noPerms();
                 }
             } else if ((containsString(Playermessage, "sai") && containsString(Playermessage, "set") && containsString(Playermessage, "home"))) {
                 if (p.hasPermission("sai.home")) {
-
                     Home.setHome(p);
-
                     new SendAIMessage(0.5, "Sure thing " + p.getName() + "! welcome home", "ahh, home sweet home", "Done! should i arrange a house warming?");
                 } else if (!p.hasPermission("sai.home")) {
 
@@ -201,10 +197,16 @@ public class ServerChatListener implements Listener {
                     noPerms();
                 }
             }
-            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "gamemode") && !containsString(Playermessage, "check"))) {
+            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "creative") && !containsString(Playermessage, "check"))) {
                 if (p.hasPermission("sai.gamemode")) {
-                    Gamemode gm = new Gamemode(p);
-                    gm.change();
+                    p.setGameMode(GameMode.CREATIVE);
+                } else {
+                    noPerms();
+                }
+            }
+            if ((containsString(Playermessage, "sai") && containsString(Playermessage, "survival") && !containsString(Playermessage, "check"))) {
+                if (p.hasPermission("sai.gamemode")) {
+                    p.setGameMode(GameMode.SURVIVAL);
                 } else {
                     noPerms();
                 }
@@ -223,8 +225,7 @@ public class ServerChatListener implements Listener {
                     //new SendPrivateAIMessage(p, 0.5, "Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function","Warning: My AI has not finished learning this function");
                     Player target = finder.findPlayerInArray(Playermessage);
                     new SendPrivateAIMessage(p, 0.5, "checking gamemode for " + target.getDisplayName(), "ok this will take a second ", "ok let me check my memory circuits for " + target.getDisplayName());
-                    Gamemode mode = new Gamemode(target);
-                    String gamemode = mode.check();
+                    String gamemode = target.getGameMode().toString();
                     new SendPrivateAIMessage(p, 0.5, "it seems that " + target.getDisplayName() + "is in " + gamemode, "it seems that " + target.getDisplayName() + "is in " + gamemode, "it seems that " + target.getDisplayName() + "is in " + gamemode);
                 } else {
                     noPerms();
