@@ -1,4 +1,6 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
+
+import java.util.Collection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -9,8 +11,8 @@ public class Utils {
     //hold random functions here to save space in larger classes
     //are you here?
     public static int PlayersOnline() {
-        Player[] players = Bukkit.getOnlinePlayers();
-        int Online = players.length;
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
+        int Online = players.size();
         return Online;
     }
 

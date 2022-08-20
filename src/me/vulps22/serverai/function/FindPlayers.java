@@ -1,12 +1,13 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.vulps22.ServerAIReWrite.ServerAI;
+import me.vulps22.serverai.ServerAI;
 
 /**
  *
@@ -20,17 +21,16 @@ public class FindPlayers {
             ServerAI.logger.log(Level.INFO, string);
         }
         Player foundPlayer = null;
-        Player[] player = Bukkit.getOnlinePlayers();
-
-
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
 
         for (int i = 0; i < playernames.length; i++) {
-            for (int j = 0; j < player.length; j++) {
-                String play = player[j].getPlayerListName().toLowerCase();
+            for (Player player : players) {
+                String play = player.getPlayerListName().toLowerCase();
                 if (play.equals(playernames[i])) {
-                    foundPlayer = player[j];
+                    foundPlayer = player;
                 }
+
             }
         }
 
@@ -39,7 +39,7 @@ public class FindPlayers {
 
     public static Player findPlayerInArray(String[] playernames, Player p) {
         Player foundPlayer = null;
-        Player[] player = Bukkit.getOnlinePlayers();
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
         ArrayList chat = new ArrayList();
         for (int i = 0; i < playernames.length; i++) {
@@ -47,15 +47,15 @@ public class FindPlayers {
         }
 
         for (int i = 0; i < playernames.length; i++) {
-            for (int j = 0; j < player.length; j++) {
-                String play = player[j].getPlayerListName().toLowerCase();
+
+            for (Player player : players) {
+                String play = player.getPlayerListName().toLowerCase();
                 if (play.equals(playernames[i])) {
-                    foundPlayer = player[j];
+                    foundPlayer = player;
                 }
                 if (foundPlayer == null && chat.contains("me")) {
                     foundPlayer = p;
                 }
-
             }
         }
 
@@ -63,26 +63,26 @@ public class FindPlayers {
     }
 
     public static Player[] findPlayersInArray(String[] playernames, Player p) {
-        Player[] foundPlayer = null;
-        Player[] player = Bukkit.getOnlinePlayers();
+        Player[] foundPlayer = {};
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
         ArrayList chat = new ArrayList();
         for (int i = 0; i < playernames.length; i++) {
             chat.add(playernames[i]);
         }
         for (int i = 0; i < playernames.length; i++) {
-            for (int j = 0; j < player.length; j++) {
-                String play = player[j].getPlayerListName().toLowerCase();
+            for (Player player: players) {
+                String play = player.getPlayerListName().toLowerCase();
                 if (foundPlayer[0] !=null) {
                     if (play.equals(playernames[i])) {
-                        foundPlayer[0] = player[j];
+                        foundPlayer[0] = player;
                     }
                     if (foundPlayer == null && chat.contains("me")) {
                         foundPlayer[0] = p;
                     }
                 }else{
                 if (play.equals(playernames[i]) && !foundPlayer[0].getPlayerListName().toLowerCase().equals(playernames[i])) {
-                        foundPlayer[1] = player[j];
+                        foundPlayer[1] = player;
                     }
                     if (foundPlayer[1] == null && chat.contains("me")) {
                         foundPlayer[1] = p;

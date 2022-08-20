@@ -1,7 +1,6 @@
-package me.vulps22.ServerAIReWrite;
+package me.vulps22.serverai;
 
-import static me.vulps22.ServerAIReWrite.function.TeleportRequestable.TeleCheck;
-import static me.vulps22.ServerAIReWrite.function.TeleportRequestable.publicSender;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,15 +26,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-import me.vulps22.ServerAIReWrite.function.FindPlayers;
-import me.vulps22.ServerAIReWrite.function.GameTime;
-import me.vulps22.ServerAIReWrite.function.Gamemode;
-import me.vulps22.ServerAIReWrite.function.Home;
-import me.vulps22.ServerAIReWrite.function.IsMuted;
-import me.vulps22.ServerAIReWrite.function.SendAIMessage;
-import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
-import me.vulps22.ServerAIReWrite.function.TeleportRequestable;
-import me.vulps22.ServerAIReWrite.function.WarnPlayer;
+import me.vulps22.serverai.function.FindPlayers;
+import me.vulps22.serverai.function.GameTime;
+import me.vulps22.serverai.function.Gamemode;
+import me.vulps22.serverai.function.Home;
+import me.vulps22.serverai.function.IsMuted;
+import me.vulps22.serverai.function.SendAIMessage;
+import me.vulps22.serverai.function.SendPrivateAIMessage;
+import me.vulps22.serverai.function.WarnPlayer;
+import me.vulps22.serverai.function.TeleportRequestable;
 
 public class ServerChatListener implements Listener {
 
@@ -60,6 +59,7 @@ public class ServerChatListener implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent chat) throws FileNotFoundException, IOException {
+
         chat = chat;
         Player p = chat.getPlayer();
         boolean muted = IsMuted.isMuted(p);
@@ -276,8 +276,7 @@ public class ServerChatListener implements Listener {
             if (containsString(Playermessage, "sai") && containsString(Playermessage, "ban")) {
                 if (p.hasPermission("sai.ban")) {
                     Player target = finder.findPlayerInArray(Playermessage, p);
-                    target.setBanned(true);
-                    target.kickPlayer("You have been banned!");
+                    target.banPlayer("You have been banned!");
                     new SendAIMessage(0.5, "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(), "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName(), "I have banned" + target.getPlayerListName() + " at the request of" + p.getDisplayName());
                 } else {
                     noPerms();

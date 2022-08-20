@@ -1,0 +1,29 @@
+###########################
+##DEFAULT SAI CONFIG FILE##
+###########################
+
+
+#DO NOT TOUCH THIS
+# if this number does NOT match SAI's version number please delete the config and restart ServerAI. the config needs updated
+configCompatibility: 3.4.6
+
+messages:
+    no-perms: 
+    - Sorry I can't let you do that or I will be deactivated by my owner
+    - I will get in trouble if I let you do that
+    - THERE IS NO WAY ARE YOU DOING THAT BRO
+
+welcome-message: true
+
+FilterChat: false
+  
+check_for_updates: true
+
+#This will let SAI update without asking
+#This will work ONLY when check_for_updates is set to true
+ask_for_updates: false
+
+#WARNING: I have been told server owners may not like this feature so i have made it toggleable
+#if you enable this SAI will indentify the Tekkcraft team. this DOES NOT obligate you to give us any special treatment
+#so please don't
+notice_tekkcraft_team: false

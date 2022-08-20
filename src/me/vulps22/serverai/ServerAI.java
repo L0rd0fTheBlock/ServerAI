@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite;
+package me.vulps22.serverai;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +14,10 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.vulps22.ServerAIReWrite.function.IsMuted;
-import me.vulps22.ServerAIReWrite.function.SendAIMessage;
-import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
-import me.vulps22.ServerAIReWrite.function.Utils;
-import me.vulps22.ServerAIReWrite.function.Warning;
+import me.vulps22.serverai.function.IsMuted;
+import me.vulps22.serverai.function.SendAIMessage;
+import me.vulps22.serverai.function.Utils;
+import me.vulps22.serverai.function.Warning;
 
 public class ServerAI extends JavaPlugin {
 

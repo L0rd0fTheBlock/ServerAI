@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.bukkit.entity.Player;
 
-import me.vulps22.ServerAIReWrite.ServerAI;
+import me.vulps22.serverai.ServerAI;
 
 public class IsMuted {
 

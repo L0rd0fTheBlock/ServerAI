@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite;
+package me.vulps22.serverai;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.vulps22.ServerAIReWrite.ServerAI;
-import me.vulps22.ServerAIReWrite.function.SendAIMessage;
-import me.vulps22.ServerAIReWrite.function.SendPrivateAIMessage;
+import me.vulps22.serverai.function.SendAIMessage;
+import me.vulps22.serverai.function.SendPrivateAIMessage;
 
 public class LoginListener implements Listener {
 
@@ -49,7 +48,9 @@ public class LoginListener implements Listener {
 //Does SAI recognise the Tekkcraft team? personalized messages for each member of the team
         if (ServerAI.know_maker = true) {
             String name = event.getPlayer().getDisplayName();
+            System.out.println(name);
             if (name.equals("vulps22")) {
+                
                 new SendAIMessage(0.5, "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D", "My creator Vulps22 has just logged onto the server! :D");
             } else if (name.equals("random8861")) {
                 

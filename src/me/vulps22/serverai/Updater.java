@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite;
+package me.vulps22.serverai;
 
 /* * Updater for Bukkit. * * This class provides the means to safetly and easily update a plugin,* or check to see if it is updated using dev.bukkit.org */
 import java.io.*;

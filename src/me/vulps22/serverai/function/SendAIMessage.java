@@ -1,14 +1,14 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import java.awt.Toolkit;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 
-public class SendPrivateAIMessage {
+public class SendAIMessage {
 
     ChatColor RED = ChatColor.RED;
     ChatColor WHITE = ChatColor.WHITE;
@@ -18,21 +18,19 @@ public class SendPrivateAIMessage {
     String MTS3 = "default";
     String RMSG = "default";
     Timer timer;
-    Player sendTo;
 
-    public SendPrivateAIMessage(Player player, double d, String message1, String message2, String message3) { //can i ask you a question?
+    public SendAIMessage(double d, String message1, String message2, String message3) { //can i ask you a question?
         toolkit = Toolkit.getDefaultToolkit();
         timer = new Timer();
-        timer.schedule(new RemindTask(player, message1, message2, message3), (long) (d * 1000));
+        timer.schedule(new RemindTask(message1, message2, message3), (long) (d * 1000));
     }
 
     class RemindTask extends TimerTask {
 
-        public RemindTask(Player player, String message1, String message2, String message3) {
+        public RemindTask(String message1, String message2, String message3) {
             MTS1 = message1;
             MTS2 = message2;
             MTS3 = message3;
-            sendTo = player;
         }
 
         public void run() {
@@ -45,7 +43,7 @@ public class SendPrivateAIMessage {
             } else if (MessageNum == 3) {
                 RMSG = MTS3;
             }
-            sendTo.sendMessage(RED + "[SAI] " + WHITE + RMSG);
+            Bukkit.getServer().broadcastMessage(RED + "[SAI] " + WHITE + RMSG);
             timer.cancel();
         }
     }

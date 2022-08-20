@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,9 +10,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 
-import me.vulps22.ServerAIReWrite.ServerAI;
-import me.vulps22.ServerAIReWrite.function.ReadWrite;
-import me.vulps22.ServerAIReWrite.function.SendAIMessage;
+import me.vulps22.serverai.ServerAI;
+import me.vulps22.serverai.function.ReadWrite;
+import me.vulps22.serverai.function.SendAIMessage;
 
 public class WarnPlayer {
 
@@ -49,8 +49,7 @@ public class WarnPlayer {
                 RecordWarnings("4", p.getName());
                 new SendAIMessage(0.5, p.getName() + "has been banned from this server for continuously using offensive language", "i have had to ban " + p.getName() + "for their language!", "wow, they just do not learn. " + p.getName() + "has been banned for their language");
                 chat.setCancelled(true);
-                p.setBanned(true);
-                p.kickPlayer(RED + "[SAI] " + WHITE + "I do not allow such language on my servers " + p.getName() + "! You have been banned!"); //this will make ban work
+                p.banPlayer(RED + "[SAI] " + WHITE + "I do not allow such language on my servers " + p.getName() + "! You have been banned!");
             }
         }
 

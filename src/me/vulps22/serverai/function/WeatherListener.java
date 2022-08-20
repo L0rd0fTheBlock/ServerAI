@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import org.bukkit.event.Listener;
 

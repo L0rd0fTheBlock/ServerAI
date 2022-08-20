@@ -2,26 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import me.vulps22.ServerAIReWrite.ServerAI;
-import me.vulps22.ServerAIReWrite.ServerChatListener;
-import static me.vulps22.ServerAIReWrite.ServerChatListener.plugin;
-import static me.vulps22.ServerAIReWrite.ServerChatListener.sendMuteMsg;
-import org.bukkit.Bukkit;
+import me.vulps22.serverai.ServerChatListener;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.ChatColor;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.PluginDescriptionFile;
-
 /**
  *
  * @author dmkiller11

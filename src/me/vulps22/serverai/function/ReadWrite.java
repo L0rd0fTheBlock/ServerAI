@@ -1,4 +1,4 @@
-package me.vulps22.ServerAIReWrite.function;
+package me.vulps22.serverai.function;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import me.vulps22.ServerAIReWrite.ServerAI;
+import me.vulps22.serverai.ServerAI;
 
 public class ReadWrite {
 
