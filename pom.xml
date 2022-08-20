@@ -35,7 +35,7 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>${basedir}/src/me/vulps22/serverai</sourceDirectory>
+    <sourceDirectory>${basedir}/src</sourceDirectory>
     <outputDirectory>${basedir}/target/classes</outputDirectory>
     <resources>
       <resource>
